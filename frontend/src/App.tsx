@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './style.css';
+import axios from 'axios';
 
 function App() {
   const [rainToggle, setRainToggle] = useState(false);
@@ -9,27 +10,25 @@ function App() {
     <div className='App'>
       <div
         className={`button ${rainToggle ? 'active' : ''}`}
-        onClick={() => {
+        onClick={async () => {
           setRainToggle(!rainToggle);
+          await axios.post('http://localhost:3000/', {
+            message: 'regn'
+          });
         }}
       >
         REGN
       </div>
       <div
         className={`button ${vaporToggle ? 'active' : ''}`}
-        onClick={() => {
+        onClick={async () => {
           setVaporToggle(!vaporToggle);
+          await axios.post('http://localhost:3000/', {
+            message: 'damp'
+          });
         }}
       >
         DAMP
-      </div>
-      <div
-        className='button'
-        onClick={async () => {
-          await fetch('http://localhost:3000/');
-        }}
-      >
-        PILS
       </div>
     </div>
   );
